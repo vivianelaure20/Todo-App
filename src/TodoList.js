@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+
 import TodoItems from './TodoItems.js';
 import './TodoList.css';
+import React, {useState} from 'react';
 
-class TodoList extends Component{
+class TodoList extends useState{
 constructor(props){
   super(props);
 
