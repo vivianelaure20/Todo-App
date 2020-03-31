@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import TodoItems from "./TodoItems.js";
 import "./TodoList.css";
 
@@ -37,12 +36,16 @@ const TodoList = ({}) => {
   return (
     <div className="todoListMain">
       <div className="header">
-        <form onSubmit={this.addItem}>
+        <form
+          onSubmit={e => {
+            addItem(e.target.value);
+          }}
+        >
           <input placeholder="Enter Task"></input>
           <button type="submit">add</button>
         </form>
       </div>
-      <TodoItems entries={this.state.items} delete={this.deleteItem} />
+      <TodoItems entries={items} delete={deleteItem} />
     </div>
   );
 };

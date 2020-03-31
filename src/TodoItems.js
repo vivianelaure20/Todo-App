@@ -1,17 +1,13 @@
 
 import React, {useState} from 'react';
 
+const TodoItems = ({}) => {
 
-class TodoItems extends useState{
-constructor(props){
-  super(props);
+  const [items, setItems] = useState([]);
+  
 
-  this.createTasks=this.createTasks.bind(this);
-
-}
-
-
-createTasks(item){
+const createTasks =(item)=>{
+  
   return <li onClick ={()=> this.delete(item.key)}
   key={item.key}>{item.text}</li>
 
@@ -22,14 +18,14 @@ delete(key){
   this.props.delete(key);
 }
 
- render(){
-   var todoEntries = this.props.entries;
+ 
+   var todoEntries = this.state.entries;
    var listItems =todoEntries.map(this.createTasks);
 
    return(
      <ul className="theList">{listItems}</ul>
    );
- }
+ 
 
 }
 
