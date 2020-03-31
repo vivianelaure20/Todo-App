@@ -42,6 +42,7 @@ return (item.key !==key)
   });
 
   this.setState({
+    
     items:filteredItems
   });
 
