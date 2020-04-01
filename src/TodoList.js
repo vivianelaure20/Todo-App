@@ -36,16 +36,17 @@ const TodoList = ({}) => {
   return (
     <div className="todoListMain">
       <div className="header">
-        <form
-          onSubmit={e => {
-            addItem(e.target.value);
-          }}
-        >
-          <input placeholder="Enter Task"></input>
+        <form onSubmit={setItems({ addItem })}>
+          <input
+            items={items}
+            onChange={e => setItems(e.target.value)}
+            placeholder="Enter Task"
+          ></input>
           <button type="submit">add</button>
         </form>
+        S
       </div>
-      <TodoItems entries={items} delete={deleteItem} />
+      <TodoItems entries={setItems(items)} delete={setItems.deleteItem} />
     </div>
   );
 };
