@@ -23,7 +23,7 @@ const TodoList = ({}) => {
     e.preventDefault();
   };
 
-  const deleteItem = key => {
+  const deleteIems = key => {
     var filteredItems = this.state.items.filter(function(item) {
       return item.key !== key;
     });
@@ -36,17 +36,17 @@ const TodoList = ({}) => {
   return (
     <div className="todoListMain">
       <div className="header">
-        <form onSubmit={setItems({ addItem })}>
+        <form onSubmit={setItems.addItem}>
           <input
-            items={items}
             onChange={e => setItems(e.target.value)}
             placeholder="Enter Task"
           ></input>
-          <button type="submit">add</button>
+          <button type="submit" onClick={addItem}>
+            add
+          </button>
         </form>
-        S
       </div>
-      <TodoItems entries={setItems(items)} delete={setItems.deleteItem} />
+      <TodoItems entries={setItems.newItem} deleteItem={setItems.deleteIems} />
     </div>
   );
 };

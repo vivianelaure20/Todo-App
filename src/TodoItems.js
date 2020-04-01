@@ -1,34 +1,35 @@
-import React, { useState } from "react";
 
-// This can be declared as a separate components as we pass state to it
-const Task = ({ item, onClick}) => {
-  return (
-    <li onClick={onClick}>
-      {item.text}
-    </li>
-  );
-};
+import React, {Component} from 'react';
 
-const TodoItems = (props) => {
-  const [items, setItems] = useState([]);
-  
-  // we pass the index of the item to be removed
-  const deleteItem = index => {
-    console.log("Index", index);
-    
-    // This is called a spread operator, it creates a new array from the old one
-    // Look up how it works
-    let newItems = [...items];
-    
-    // Splice can either remove or add items to an array
-    // Reference: https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
-    newItems.splice(index, 1)
-   
-    // Set the new items
-    setItems(newItems)
-  };
-  
-  return <ul className="theList">{items.map((x, i) => <Task key={i} item={x} onClick={() => deleteItem(i)} />)}</ul>;
-};
+class TodoItems extends Component{
+constructor(props){
+  super(props);
+
+  this.createTasks=this.createTasks.bind(this);
+
+}
+
+
+createTasks(item){
+  return <li onClick ={()=> this.delete(item.key)}
+  key={item.key}>{item.text}</li>
+
+}
+
+delete(key){
+  console.log("key is:" +key);
+  this.props.delete(key);
+}
+
+ render(){
+   var todoEntries = this.props.entries;
+   var listItems =todoEntries.map(this.createTasks);
+
+   return(
+     <ul className="theList">{listItems}</ul>
+   );
+ }
+
+}
 
 export default TodoItems;

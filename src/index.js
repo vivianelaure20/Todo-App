@@ -3,11 +3,4 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import TodoList from "./TodoList";
 
-var destination = document.querySelector("#container");
-
-ReactDOM.return(
-  <div>
-    <TodoList />
-  </div>,
-  destination
-);
+ReactDOM.render(<TodoList />, document.querySelector("#container"));
