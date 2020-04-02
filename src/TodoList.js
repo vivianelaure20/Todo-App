@@ -3,50 +3,48 @@ import TodoItems from "./TodoItems.js";
 import "./TodoList.css";
 
 const TodoList = ({}) => {
-  const [items, setItems] = useState([]);
+  const [texts, setTexts] = useState([]);
 
+  const Note = ({ item, onChange }) => {
+    return <li onChange={e => setTexts(e.target.value)}></li>;
+  };
   const addItem = e => {
-    if (this._inputElement.value !== "") {
+    if (texts.value !== "") {
       var newItem = {
-        text: this._inputElement.value,
+        text: texts.value,
         key: Date.now()
       };
 
-      this.setState(prevState => {
+      texts.useState(prevState => {
         return {
-          items: prevState.items.concat(newItem)
+          item: prevState.texts.concat(newItem)
         };
       });
     }
-    this._inputElement.value = "";
-    console.log(this.state.items);
+    texts.value = "";
+    console.log(this.state.texts);
     e.preventDefault();
   };
 
-  const deleteIems = key => {
-    var filteredItems = this.state.items.filter(function(item) {
-      return item.key !== key;
-    });
-
-    this.setState({
-      items: filteredItems
-    });
+  const deleteItem = key => {
+    console.log("Key", key);
+    let newItems = [...texts];
+    console.log("key", newItems);
+    newItems.splice(key, 1);
+    setTexts(newItems);
   };
 
   return (
     <div className="todoListMain">
       <div className="header">
-        <form onSubmit={setItems.addItem}>
-          <input
-            onChange={e => setItems(e.target.value)}
-            placeholder="Enter Task"
-          ></input>
-          <button type="submit" onClick={addItem}>
+        <form onSubmit={setTexts.addItem}>
+          <input placeholder="Enter Task"></input>
+          <button type="submit" onChange={addItem}>
             add
           </button>
         </form>
       </div>
-      <TodoItems entries={setItems.newItem} deleteItem={setItems.deleteIems} />
+      <Note entries={setTexts.newItems} deleteItem={setTexts.deleteItem} />
     </div>
   );
 };
