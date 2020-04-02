@@ -24,6 +24,8 @@ const TodoList = ({}) => {
     texts.value = "";
     console.log(this.state.texts);
     e.preventDefault();
+
+    // reset text state here
   };
 
   const deleteItem = key => {
