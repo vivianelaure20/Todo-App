@@ -1,52 +1,52 @@
 import React, { useState } from "react";
+
 import TodoItems from "./TodoItems.js";
+
 import "./TodoList.css";
 
-const TodoList = ({}) => {
-  const [texts, setTexts] = useState([]);
+const TodoList = props => {
+  const [items, setItems] = useState([]);
+  const [taskValue, setTaskValue] = useState("");
 
-  const Note = ({ item, onChange }) => {
-    return <li onChange={e => setTexts(e.target.value)}></li>;
-  };
-  const addItem = e => {
-    if (texts.value !== "") {
-      var newItem = {
-        text: texts.value,
-        key: Date.now()
-      };
+  const addItem = () => {
+    // These 2 statements do the same thing...
+    // const newItems = items.concat(taskValue);
+    const newItems = [...items, taskValue];
 
-      texts.useState(prevState => {
-        return {
-          item: prevState.texts.concat(newItem)
-        };
-      });
-    }
-    texts.value = "";
-    console.log(this.state.texts);
-    e.preventDefault();
+    // This sets the array with the new item , it is correct :)
+    setItems(newItems);
 
-    // reset text state here
+    // Set Task Value to blank
+    setTaskValue("");
   };
 
-  const deleteItem = key => {
-    console.log("Key", key);
-    let newItems = [...texts];
+  const deleteItem = index => {
+    console.log("Key", index);
+    let newItems = [...items];
     console.log("key", newItems);
-    newItems.splice(key, 1);
-    setTexts(newItems);
+    newItems.splice(index, 1);
+    setItems(newItems);
   };
 
   return (
     <div className="todoListMain">
       <div className="header">
-        <form onSubmit={setTexts.addItem}>
-          <input placeholder="Enter Task"></input>
-          <button type="submit" onChange={addItem}>
+        <form>
+          <input
+            placeholder="Enter Task"
+            value={taskValue}
+            onChange={e => {
+              // Sets task value to e.target.value which is the value of the input
+              setTaskValue(e.target.value);
+            }}
+          />
+          <button type="button" onClick={addItem}>
             add
           </button>
         </form>
       </div>
-      <Note entries={setTexts.newItems} deleteItem={setTexts.deleteItem} />
+
+      <TodoItems entries={items} deleteItem={deleteItem} />
     </div>
   );
 };
